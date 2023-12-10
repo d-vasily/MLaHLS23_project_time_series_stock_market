@@ -13,12 +13,12 @@ sns.set_style('darkgrid')
 
 # задаем список таргетов для которых сделали модели
 # targets = ['open', 'close', 'high', 'low', 'volume']
-targets = ['open']
+targets = ['open', 'close']
 
 @st.cache_data(ttl=60*60*24)
 def load_data(uri):
     data = (pd.read_csv(uri).rename({'timestamp': 'date'}, axis=1).sort_values(['date'])\
-            .tail(365*10).reset_index(drop=True))
+            .tail(261*7).reset_index(drop=True))
     return data
 
 
@@ -68,7 +68,6 @@ for target in targets:
 selected_target = st.selectbox('Выберите таргет для построения прогноза', targets)
 
 
-# Выбор диапазона для построения графика и расчета метрик
 MIN_MAX_RANGE = [pd.to_datetime(d_results[selected_target]['date'].min()),
                  pd.to_datetime(d_results[selected_target]['date'].max())]
 PRE_SELECTED_DATES = [pd.to_datetime(d_results[selected_target]['date'].min()),
@@ -78,7 +77,7 @@ for i in range(len(MIN_MAX_RANGE)):
 for i in range(len(PRE_SELECTED_DATES)):
     PRE_SELECTED_DATES[i] = PRE_SELECTED_DATES[i].to_pydatetime()
 
-
+# Выбор диапазона для построения графика и расчета метрик
 values = st.slider(
     'Выберите диапазон времени',
     MIN_MAX_RANGE[0],
@@ -88,28 +87,26 @@ values = st.slider(
     format="YYYY-MM-DD",
     )
 
-# ind = (pd.to_datetime(d_results[selected_target]['date']).between(
-#     pd.to_datetime(values[0]) - datetime.timedelta(days=2),
-#     pd.to_datetime(values[1]) + datetime.timedelta(days=2))
-# )
 ind = (pd.to_datetime(d_results[selected_target]['date']).between(
     pd.to_datetime(values[0]),
     pd.to_datetime(values[1]))
 )
 df_tmp = d_results[selected_target][ind]
-st.write('Values:', values)
-st.write(df_tmp.head())
-st.write(df_tmp.tail())
+# st.write('Values:', values)
+# st.write(df_tmp.head())
+# st.write(df_tmp.tail())
 
+# построение графика
 fig, ax = plt.subplots(figsize=(16, 8))
 sns.lineplot(x='date', y='value', hue='variable',
              data=pd.melt(df_tmp, ['date']),
-             palette=['black', 'blue'], alpha=0.8, linestyle='--')
+             palette=['black', 'green'], alpha=0.8, linestyle='--')
 t = len(df_tmp) // 10
 ax.set_xticks(range(len(df_tmp))[::t], labels=df_tmp.date.values[::t])
 plt.grid()
 st.pyplot(fig)
 
+# расчет метрик
 y_true = df_tmp[selected_target].fillna(df_tmp[selected_target].mean())
 y_pred = df_tmp[f'{selected_target}_prediction'].fillna(df_tmp[f'{selected_target}_prediction'].mean())
 d_metrics = dict()
