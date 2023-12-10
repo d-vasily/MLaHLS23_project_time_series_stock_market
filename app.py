@@ -114,6 +114,8 @@ d_metrics['MAPE'] = sklearn.metrics.mean_absolute_percentage_error
 d_metrics['MAE'] = sklearn.metrics.mean_absolute_error
 d_metrics['MedianAE'] = sklearn.metrics.median_absolute_error
 for metric in sorted(d_metrics.keys()):
-    value = d_metrics[metric](y_true, y_pred)
+    value = round(d_metrics[metric](y_true, y_pred), 3)
     st.write(f'{metric} на рассматриваемом периоде:', value)
 
+st.write("Значение таргета и предсказания за последние 7 дней")
+st.write(df_tmp.tail(7))
