@@ -70,15 +70,10 @@ MIN_MAX_RANGE = [pd.to_datetime(d_results[selected_target]['date'].min()),
                  pd.to_datetime(d_results[selected_target]['date'].max())]
 PRE_SELECTED_DATES = [pd.to_datetime(d_results[selected_target]['date'].min()),
                       pd.to_datetime(d_results[selected_target]['date'].max())]
-
 for i in range(len(MIN_MAX_RANGE)):
     MIN_MAX_RANGE[i] = MIN_MAX_RANGE[i].to_pydatetime()
-
 for i in range(len(PRE_SELECTED_DATES)):
     PRE_SELECTED_DATES[i] = PRE_SELECTED_DATES[i].to_pydatetime()
-
-st.write(d_results[selected_target].head())
-st.write(MIN_MAX_RANGE)
 
 
 values = st.slider(
@@ -90,8 +85,10 @@ values = st.slider(
     format="YYYY-MM-DD",
     )
 
+ind = (pd.to_datetime(d_results[selected_target]['date']).between(pd.to_datetime(values[0]), pd.to_datetime(values[1])))
 st.write('Values:', values)
-st.write(d_results[selected_target].head())
+st.write(d_results[selected_target][ind].head())
+st.write(d_results[selected_target][ind].tail())
 # fig, ax = plt.subplots(figsize=(8, 6))
 # sns.histplot(data[selected_column], kde=True, ax=ax)
 # plt.grid()
