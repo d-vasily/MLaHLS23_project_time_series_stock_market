@@ -85,7 +85,10 @@ values = st.slider(
     format="YYYY-MM-DD",
     )
 
-ind = (pd.to_datetime(d_results[selected_target]['date']).between(pd.to_datetime(values[0]), pd.to_datetime(values[1])))
+ind = (pd.to_datetime(d_results[selected_target]['date']).between(
+    pd.to_datetime(values[0]) - datetime.timedelta(days=2),
+    pd.to_datetime(values[1]) + datetime.timedelta(days=2))
+)
 st.write('Values:', values)
 st.write(d_results[selected_target][ind].head())
 st.write(d_results[selected_target][ind].tail())
