@@ -98,20 +98,24 @@ st.write('Values:', values)
 st.write(df_tmp.head())
 st.write(df_tmp.tail())
 
-
 fig, ax = plt.subplots(figsize=(16, 8))
 sns.lineplot(x='date', y='value', hue='variable',
              data=pd.melt(df_tmp, ['date']),
-             palette=['red', 'blue'])
+             palette=['red', 'blue'], alpha=0.8, linestyle='--')
+t = len(df_tmp) // 10
+ax.set_xticks(range(len(df_tmp))[::t], labels=df_tmp.date.values[::t])
 plt.grid()
 st.pyplot(fig)
 
-
-
-
-
-
-
+y_true = df_tmp[selected_target]
+y_pred = df_tmp[f'{selected_target}_prediction']
+d_metrics = dict()
+d_metrics['MAPE'] = sklearn.metrics.mean_absolute_percentage_error
+d_metrics['MAE'] = sklearn.metrics.mean_absolute_error
+d_metrics['MedianAE'] = sklearn.metrics.median_absolute_error
+for metric in sorted(d_metrics.keys()):
+    value = d_metrics[metric](y_true, y_pred)
+    st.write(f'{metric} на рассматриваемом периоде:', value)
 
 
 #
