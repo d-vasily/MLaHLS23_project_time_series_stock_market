@@ -48,6 +48,9 @@
 
 https://drive.google.com/file/d/1gM9wAZHT4138s4AyroYkMQV2quX9VnSv/view?usp=share_link
 
+### Презентация для третьего чепойнта (23.12.17)
+https://docs.google.com/presentation/d/1UGRJ0HLoxLClN3CBMH6_1BAdQ80X8NHKorSeoTNNYN8/edit?usp=sharing
+
 
 
 ### Сервис
