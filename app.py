@@ -98,13 +98,13 @@ st.write('Values:', values)
 st.write(df_tmp.head())
 st.write(df_tmp.tail())
 
+
+fig, ax = plt.subplots(figsize=(16, 8))
 sns.lineplot(x='date', y='value', hue='variable',
              data=pd.melt(df_tmp, ['date']),
              palette=['red', 'blue'])
-# fig, ax = plt.subplots(figsize=(8, 6))
-# sns.histplot(data[selected_column], kde=True, ax=ax)
-# plt.grid()
-# st.pyplot(fig)
+plt.grid()
+st.pyplot(fig)
 
 
 
