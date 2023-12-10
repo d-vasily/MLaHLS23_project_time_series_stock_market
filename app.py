@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sklearn
+import datetime
 
 apikey = st.secrets['api_key']
 uri_gl = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY\
@@ -80,6 +81,7 @@ values = st.slider(
     MIN_MAX_RANGE[0],
     MIN_MAX_RANGE[1],
     PRE_SELECTED_DATES,
+    step=datetime.timedelta(days=2),
     format="YYYY-MM-DD",
     )
 
