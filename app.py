@@ -72,10 +72,10 @@ PRE_SELECTED_DATES = [pd.to_datetime(d_results[selected_target]['date'].min()),
                       pd.to_datetime(d_results[selected_target]['date'].max())]
 
 for i in range(len(MIN_MAX_RANGE)):
-    MIN_MAX_RANGE[i] = MIN_MAX_RANGE[i].to_pydatetime
+    MIN_MAX_RANGE[i] = MIN_MAX_RANGE[i].to_pydatetime()
 
 for i in range(len(PRE_SELECTED_DATES)):
-    PRE_SELECTED_DATES[i] = PRE_SELECTED_DATES[i].to_pydatetime
+    PRE_SELECTED_DATES[i] = PRE_SELECTED_DATES[i].to_pydatetime()
 
 st.write(d_results[selected_target].head())
 st.write(MIN_MAX_RANGE)
