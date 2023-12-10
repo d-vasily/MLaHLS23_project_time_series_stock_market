@@ -65,8 +65,16 @@ selected_target = st.selectbox('Выберите таргет для постр�
 
 
 # Выбор диапазона для построения графика и расчета метрик
-MIN_MAX_RANGE = (pd.to_datetime(d_results[selected_target]['date'].min()), pd.to_datetime(d_results[selected_target]['date'].max()))
-PRE_SELECTED_DATES = (pd.to_datetime(d_results[selected_target]['date'].min()), pd.to_datetime(d_results[selected_target]['date'].max()))
+MIN_MAX_RANGE = (pd.to_datetime(d_results[selected_target]['date'].min()),
+                 pd.to_datetime(d_results[selected_target]['date'].max()))
+PRE_SELECTED_DATES = (pd.to_datetime(d_results[selected_target]['date'].min()),
+                      pd.to_datetime(d_results[selected_target]['date'].max()))
+
+
+st.write(d_results[selected_target].head())
+st.write(MIN_MAX_RANGE)
+
+
 values = st.slider(
     'Выберите диапазон времени',
     MIN_MAX_RANGE[0],
