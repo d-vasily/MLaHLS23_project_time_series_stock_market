@@ -2,9 +2,6 @@
 
 # Годовой проект 1 курса магистратуры МОВС 2023 ВШЭ "Предсказание стоимости акций".
 
-Ссылка на сервис:
-https://mlahls23-project-time-series-stock-market.streamlit.app/
-
 ### Команда
 **Участники:**
 
@@ -50,3 +47,11 @@ https://mlahls23-project-time-series-stock-market.streamlit.app/
 Ссылка на датасет:
 
 https://drive.google.com/file/d/1gM9wAZHT4138s4AyroYkMQV2quX9VnSv/view?usp=share_link
+
+
+
+### Сервис
+#### Ссылка
+https://mlahls23-project-time-series-stock-market.streamlit.app/
+#### Пример работы сервиса
+![](https://github.com/d-vasily/MLaHLS23_project_time_series_stock_market/blob/main/how_it_works.gif)
