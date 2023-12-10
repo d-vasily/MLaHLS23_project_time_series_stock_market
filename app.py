@@ -9,6 +9,7 @@ import datetime
 apikey = st.secrets['api_key']
 uri_gl = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY\
 &symbol=INTC&apikey={apikey}&outputsize=full&datatype=csv'
+sns.set_style('darkgrid')
 
 # задаем список таргетов для которых сделали модели
 # targets = ['open', 'close', 'high', 'low', 'volume']
@@ -103,7 +104,7 @@ st.write(df_tmp.tail())
 fig, ax = plt.subplots(figsize=(16, 8))
 sns.lineplot(x='date', y='value', hue='variable',
              data=pd.melt(df_tmp, ['date']),
-             palette=['red', 'blue'], alpha=0.8, linestyle='--')
+             palette=['black', 'blue'], alpha=0.8, linestyle='--')
 t = len(df_tmp) // 10
 ax.set_xticks(range(len(df_tmp))[::t], labels=df_tmp.date.values[::t])
 plt.grid()
