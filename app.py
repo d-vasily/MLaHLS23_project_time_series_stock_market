@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sklearn
+import sklearn.metrics
 import datetime
 
 apikey = st.secrets['api_key']
