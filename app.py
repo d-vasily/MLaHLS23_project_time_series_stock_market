@@ -93,9 +93,14 @@ ind = (pd.to_datetime(d_results[selected_target]['date']).between(
     pd.to_datetime(values[0]),
     pd.to_datetime(values[1]))
 )
+df_tmp = d_results[selected_target][ind]
 st.write('Values:', values)
-st.write(d_results[selected_target][ind].head())
-st.write(d_results[selected_target][ind].tail())
+st.write(df_tmp.head())
+st.write(df_tmp.tail())
+
+sns.lineplot(x='date', y='value', hue='variable',
+             data=pd.melt(df_tmp, ['date']),
+             palette=['red', 'blue'])
 # fig, ax = plt.subplots(figsize=(8, 6))
 # sns.histplot(data[selected_column], kde=True, ax=ax)
 # plt.grid()
