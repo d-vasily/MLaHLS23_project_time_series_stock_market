@@ -111,7 +111,7 @@ y_true = df_tmp[selected_target]
 y_pred = df_tmp[f'{selected_target}_prediction']
 d_metrics = dict()
 # d_metrics['MAPE'] = sklearn.metrics.mean_absolute_percentage_error
-d_metrics['MAE'] = sklearn.metrics.mean_absolute_error
+# d_metrics['MAE'] = sklearn.metrics.mean_absolute_error
 d_metrics['MedianAE'] = sklearn.metrics.median_absolute_error
 for metric in sorted(d_metrics.keys()):
     value = d_metrics[metric](y_true, y_pred)
