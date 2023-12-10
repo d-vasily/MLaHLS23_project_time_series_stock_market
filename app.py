@@ -41,7 +41,7 @@ def create_prediction(data, target):
     # ниже менять ничего не надо
     new_date = str(pd.to_datetime(result['date'].max()) + pd.DateOffset(days=1))[:10]
     result.loc[len(result.index)] = [new_date, None, None]
-    result[f'{target}_prediction'] = result[f'{target}_prediction'].shift(-1)
+    result[f'{target}_prediction'] = result[f'{target}_prediction'].shift(1)
 
     return result
 
@@ -85,9 +85,13 @@ values = st.slider(
     format="YYYY-MM-DD",
     )
 
+# ind = (pd.to_datetime(d_results[selected_target]['date']).between(
+#     pd.to_datetime(values[0]) - datetime.timedelta(days=2),
+#     pd.to_datetime(values[1]) + datetime.timedelta(days=2))
+# )
 ind = (pd.to_datetime(d_results[selected_target]['date']).between(
-    pd.to_datetime(values[0]) - datetime.timedelta(days=2),
-    pd.to_datetime(values[1]) + datetime.timedelta(days=2))
+    pd.to_datetime(values[0]),
+    pd.to_datetime(values[1]))
 )
 st.write('Values:', values)
 st.write(d_results[selected_target][ind].head())
