@@ -108,8 +108,8 @@ ax.set_xticks(range(len(df_tmp))[::t], labels=df_tmp.date.values[::t])
 plt.grid()
 st.pyplot(fig)
 
-y_true = df_tmp[selected_target]
-y_pred = df_tmp[f'{selected_target}_prediction']
+y_true = df_tmp[selected_target].fillna(df_tmp[selected_target].mean())
+y_pred = df_tmp[f'{selected_target}_prediction'].fillna(df_tmp[f'{selected_target}_prediction'].mean())
 d_metrics = dict()
 d_metrics['MAPE'] = sklearn.metrics.mean_absolute_percentage_error
 d_metrics['MAE'] = sklearn.metrics.mean_absolute_error
